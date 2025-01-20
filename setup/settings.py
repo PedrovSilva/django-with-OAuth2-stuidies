@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+GITHUB_USER = str(os.getenv("GITHUB_USER"))
+GITHUB_SECRET = str(os.getenv("GITHUB_SECRET"))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,7 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-     "allauth.account.middleware.AccountMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "setup.urls"
@@ -128,6 +136,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000']
 
 
@@ -148,8 +157,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': GITHUB_USER,
+            'secret': GITHUB_SECRET,
             'key': ''
         }
     }
